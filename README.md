@@ -62,9 +62,9 @@
 
 - [Section 1: Setup](#section-1-setup)
   <!--START-SECTION:setup-toc-->
-      	- [Prerequisites](#prerequisites)
-      	- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
-      	- [Import React](#import-react)<!--END-SECTION:setup-toc-->
+	- [Prerequisites](#prerequisites)
+	- [React + TypeScript Starter Kits](#react--typescript-starter-kits)
+	- [Import React](#import-react)<!--END-SECTION:setup-toc-->
 - [Section 2: Getting Started](#section-2-getting-started)
   - [Function Components](#function-components)
   - [Hooks](#hooks)
@@ -82,18 +82,20 @@
   - [Concurrent React/React Suspense](#concurrent-reactreact-suspense)
 - [Basic Troubleshooting Handbook: Types](#basic-troubleshooting-handbook-types)
   <!--START-SECTION:types-toc-->
-      	- [Union Types and Type Guarding](#union-types-and-type-guarding)
-      	- [Optional Types](#optional-types)
-      	- [Enum Types](#enum-types)
-      	- [Type Assertion](#type-assertion)
-      	- [Simulating Nominal Types](#simulating-nominal-types)
-      	- [Intersection Types](#intersection-types)
-      	- [Union Types](#union-types)
-      	- [Overloading Function Types](#overloading-function-types)
-      	- [Using Inferred Types](#using-inferred-types)
-      	- [Using Partial Types](#using-partial-types)
-      	- [The Types I need weren't exported!](#the-types-i-need-werent-exported)
-  - [The Types I need Don't Exist!](#the-types-i-need-dont-exist)<!--END-SECTION:types-toc-->
+	- [Union Types and Type Guarding](#union-types-and-type-guarding)
+	- [Optional Types](#optional-types)
+	- [Enum Types](#enum-types)
+	- [Type Assertion](#type-assertion)
+	- [Simulating Nominal Types](#simulating-nominal-types)
+	- [Intersection Types](#intersection-types)
+	- [Union Types](#union-types)
+	- [Overloading Function Types](#overloading-function-types)
+	- [Using Inferred Types](#using-inferred-types)
+	- [Using Partial Types](#using-partial-types)
+	- [The Types I need weren't exported!](#the-types-i-need-werent-exported)
+	- [The Types I need don't exist!](#the-types-i-need-dont-exist)
+	  * [Typing Exported Hooks](#typing-exported-hooks)
+	  * [Typing Exported Components](#typing-exported-components)<!--END-SECTION:types-toc-->
 - [Troubleshooting Handbook: Operators](#troubleshooting-handbook-operators)
 - [Troubleshooting Handbook: Utilties](#troubleshooting-handbook-utilities)
 - [Troubleshooting Handbook: tsconfig.json](#troubleshooting-handbook-tsconfigjson)
@@ -109,7 +111,6 @@
   </details>
 
 <!--START-SECTION:setup-->
-
 # Section 1: Setup
 
 ## Prerequisites
@@ -161,7 +162,6 @@ You should also check [the new TypeScript docs for official descriptions between
 # Section 2: Getting Started
 
 <!--START-SECTION:function-components-->
-
 ## Function Components
 
 These can be written as normal functions that take a `props` argument and return a JSX element.
@@ -241,7 +241,6 @@ const MyArrayComponent = () => (Array(5).fill(<div />) as any) as JSX.Element;
 <!--END-SECTION:function-components-->
 
 <!--START-SECTION:hooks-->
-
 ## Hooks
 
 Hooks are [supported in `@types/react` from v16.8 up](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/a05cc538a42243c632f054e42eab483ebf1560ab/types/react/index.d.ts#L800-L1031).
@@ -370,17 +369,6 @@ export function reducer(state: AppState, action: Action): AppState {
 }
 ```
 
-Setting the type for `dispatch` function:
-
-```jsx
-import { Dispatch } from "react";
-import { Action } from "./reducer";
-
-const handleClick = (dispatch: Dispatch<Action>) => {
-  dispatch({ type: "SET_ONE", payload: "some string" });
-};
-```
-
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/C4TwDgpgBAgmYGVgENjQLxQN4F8CwAUKJLAMbACWA9gHZTqFRQA+2UxEAXFAEQICiAFQD6AeQBy-HgG4oYZCAA2VZABNuAZ2AAnCjQDmUfASass7cF14CRggOqiZchcrXcaAVwC2AIwjajaUJCCAAPMCptYCgAMw8acmo6bQhVD1J-AAotVCs4RBQ0ABooZETabhhymgBKSvgkXOxGKA0AdwpgUgALKEyyyloAOg4a5pMmKFJkDWg+ITFJHk4WyagU4A9tOixVtaghw5zivbXaKwGkofklFVUoAHoHqAADG9dVF6gKDVadPX0p0Ce2ms2sC3sjhWEzWGy2OyBTEOQ2OECKiPYbSo3Euw3ed0ezzeLjuXx+UE8vn8QJwQRhUFUEBiyA8imA0P26wgm22f1ydKYxhwQA)
 
 <details>
@@ -479,7 +467,6 @@ Example React Hooks + TypeScript Libraries:
 <!--END-SECTION:hooks-->
 
 <!--START-SECTION:class-components-->
-
 ## Class Components
 
 Within TypeScript, `React.Component` is a generic type (aka `React.Component<PropType, StateType>`), so you want to provide it with (optional) prop and state type parameters:
@@ -590,7 +577,6 @@ class App extends React.Component<{
 <!--END-SECTION:class-components-->
 
 <!--START-SECTION:default-props-->
-
 ## Typing defaultProps
 
 For TypeScript 3.0+, type inference [should work](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html), although [some edge cases are still problematic](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/61). Just type your props like normal, except don't use `React.FC`.
@@ -722,7 +708,6 @@ The problem with this approach is it causes complex issues with the type inferen
 <!--END-SECTION:default-props-->
 
 <!--START-SECTION:type-or-interface-->
-
 ## Types or Interfaces?
 
 `interface`s are different from `type`s in TypeScript, but they can be used for very similar things as far as common React uses cases are concerned. Here's a helpful rule of thumb:
@@ -750,7 +735,6 @@ It's a nuanced topic, don't get too hung up on it. Here's a handy graphic:
 <!--END-SECTION:type-or-interface-->
 
 <!--START-SECTION:basic-type-examples-->
-
 ## Basic Prop Types Examples
 
 ```tsx
@@ -793,7 +777,6 @@ Notice we have used the TSDoc `/** comment */` style here on each prop. You can 
 <!--END-SECTION:basic-type-examples-->
 
 <!--START-SECTION:react-prop-type-examples-->
-
 ## Useful React Prop Type Examples
 
 ```tsx
@@ -827,7 +810,6 @@ Quote [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-che
 <!--END-SECTION:react-prop-type-examples-->
 
 <!--START-SECTION:get-derived-state-from-props-->
-
 ## getDerivedStateFromProps
 
 Before you start using `getDerivedStateFromProps`, please go through the [documentation](https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops) and [You Probably Don't Need Derived State](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html). Derived State can be easily achieved using hooks which can also help set up memoization easily.
@@ -895,7 +877,6 @@ class Comp extends React.PureComponent<Props, State> {
 <!--END-SECTION:get-derived-state-from-props-->
 
 <!--START-SECTION:forms-and-events-->
-
 ## Forms and Events
 
 If performance is not an issue, inlining handlers is easiest as you can just use [type inference and contextual typing](https://www.typescriptlang.org/docs/handbook/type-inference.html#contextual-typing):
@@ -1000,7 +981,6 @@ Of course, if you're making any sort of significant form, [you should use Formik
 <!--END-SECTION:forms-and-events-->
 
 <!--START-SECTION:context-->
-
 ## Context
 
 Using `React.createContext` with an empty object as default value.
@@ -1239,7 +1219,6 @@ const Consumer = Context.Consumer;
 <!--END-SECTION:context-->
 
 <!--START-SECTION:forward-create-ref-->
-
 ## forwardRef/createRef
 
 Check the [Hooks section](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#hooks) for `useRef`.
@@ -1278,7 +1257,6 @@ You may also wish to do [Conditional Rendering with `forwardRef`](https://github
 <!--END-SECTION:forward-create-ref-->
 
 <!--START-SECTION:portals-->
-
 ## Portals
 
 Using `ReactDOM.createPortal`:
@@ -1317,7 +1295,6 @@ This example is based on the [Event Bubbling Through Portal](https://reactjs.org
 <!--END-SECTION:portals-->
 
 <!--START-SECTION:error-boundaries-->
-
 ## Error Boundaries
 
 _Not written yet._
@@ -1327,7 +1304,6 @@ _Not written yet._
 <!--END-SECTION:error-boundaries-->
 
 <!--START-SECTION:concurrent-->
-
 ## Concurrent React/React Suspense
 
 _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more on React Suspense and Time Slicing.
@@ -1337,14 +1313,13 @@ _Not written yet._ watch <https://github.com/sw-yx/fresh-async-react> for more o
 <!--END-SECTION:concurrent-->
 
 <!--START-SECTION:types-->
-
 # Troubleshooting Handbook: Types
 
 > ⚠️ Have you read [the TypeScript FAQ](https://github.com/microsoft/TypeScript/wiki/FAQ)?) Your answer might be there!
 
 Facing weird type errors? You aren't alone. This is the hardest part of using TypeScript with React. Be patient - you are learning a new language after all. However, the more you get good at this, the less time you'll be working _against_ the compiler and the more the compiler will be working _for_ you!
 
-Try to avoid typing with `any` as much as possible to experience the full benefits of typescript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
+Try to avoid typing with `any` as much as possible to experience the full benefits of TypeScript. Instead, let's try to be familiar with some of the common strategies to solve these issues.
 
 ## Union Types and Type Guarding
 
@@ -1861,171 +1836,9 @@ declare module "react-router-dom" {
 
 For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
 
-# Troubleshooting Handbook: Images and other non-TS/TSX files
-
-What's more annoying than modules with unexported types? Modules that are **untyped**!
-
-Fret not! There are more than a couple of ways in which you can solve this problem.
-
-A **lazier** way would be to create a new type declaration file, say `typedec.d.ts`– if you don't already have one. Ensure that the path to file is resolvable by TypeScript by checking the `include` array in the `tsconfig.json` file at the root of your directory.
-
-```json
-// inside tsconfig.json
-{
-  // ...
-  "include": [
-    "src" // automatically resolves if the path to declaration is src/typedec.d.ts
-  ]
-  // ...
-}
-```
-
-Within this file, add the `declare` syntax for your desired module, say `my-untyped-module`– to the declaration file:
-
-```ts
-// inside typedec.d.ts
-declare module "my-untyped-module";
-```
-
-This one-liner alone is enough if you just need it to work without errors. A even hackier, write-once-and-forget way would be to use `"*"` instead which would then apply the `Any` type for all existing and future untyped modules.
-
-This solution works well as a workaround if you have less than a couple untyped modules. Anything more, you now have a ticking type-bomb in your hands. The only way of circumventing this problem would be to define the missing types for those untyped modules as explained in the following sections.
-
-### Typing Exported Hooks
-
-Typing Hooks is just like typing pure functions.
-
-The following steps work under two assumptions:
-
-- You have already created a type declaration file as stated earlier in the section.
-- You have access to the source code - specifically the code that directly exports the functions you will be using. In most cases, it would be housed in an `index.js` file.
-  Typically you need a minimum of **two** type declarations (one for **Input Prop** and the other for **Return Prop**) to define a hook completely. Suppose the hook you wish to type follows the following structure,
-
-```js
-// ...
-const useUntypedHook = (prop) => {
-  // some processing happens here
-  return {
-    /* ReturnProps */
-  };
-};
-export default useUntypedHook;
-```
-
-then, your type declaration should most likely follow the following syntax.
-
-```ts
-declare module 'use-untyped-hook' {
-  export interface InputProps { ... }   // type declaration for prop
-  export interface ReturnProps { ... } // type declaration for return props
-  export default function useUntypedHook(
-    prop: InputProps
-    // ...
-  ): ReturnProps;
-}
-```
-
-<details>
-<summary>
-
-For instance, the [useDarkMode hook](https://github.com/donavon/use-dark-mode) exports the functions that follows a similar structure.
-
-</summary>
-
-```js
-// inside src/index.js
-const useDarkMode = (
-  initialValue = false, // -> input props / config props to be exported
-  {
-    // -> input props / config props to be exported
-    element,
-    classNameDark,
-    classNameLight,
-    onChange,
-    storageKey = "darkMode",
-    storageProvider,
-    global,
-  } = {}
-) => {
-  // ...
-  return {
-    // -> return props to be exported
-    value: state,
-    enable: useCallback(() => setState(true), [setState]),
-    disable: useCallback(() => setState(false), [setState]),
-    toggle: useCallback(() => setState((current) => !current), [setState]),
-  };
-};
-export default useDarkMode;
-```
-
-As the comments suggest, exporting these config props and return props following the aforementioned structure will result in the following type export.
-
-```ts
-declare module "use-dark-mode" {
-  /**
-   * A config object allowing you to specify certain aspects of `useDarkMode`
-   */
-  export interface DarkModeConfig {
-    classNameDark?: string; // A className to set "dark mode". Default = "dark-mode".
-    classNameLight?: string; // A className to set "light mode". Default = "light-mode".
-    element?: HTMLElement; // The element to apply the className. Default = `document.body`
-    onChange?: (val?: boolean) => void; // Overide the default className handler with a custom callback.
-    storageKey?: string; // Specify the `localStorage` key. Default = "darkMode". Set to `null` to disable persistent storage.
-    storageProvider?: WindowLocalStorage; // A storage provider. Default = `localStorage`.
-    global?: Window; // The global object. Default = `window`.
-  }
-  /**
-   * An object returned from a call to `useDarkMode`.
-   */
-  export interface DarkMode {
-    readonly value: boolean;
-    enable: () => void;
-    disable: () => void;
-    toggle: () => void;
-  }
-  /**
-   * A custom React Hook to help you implement a "dark mode" component for your application.
-   */
-  export default function useDarkMode(
-    initialState?: boolean,
-    config?: DarkModeConfig
-  ): DarkMode;
-}
-```
-
-</details>
-
-### Typing Exported Components
-
-In case of typing untyped class components, there's almost no difference in approach except for the fact that after declaring the types, you export the extend the type using `class UntypedClassComponent extends React.Component<UntypedClassComponentProps, any> {}` where `UntypedClassComponentProps` holds the type declaration.
-
-For instance, [sw-yx's Gist on React Router 6 types](https://gist.github.com/sw-yx/37a6a3d248c2d4031801f0d568904df8) implemented a similar method for typing the then untyped RR6.
-
-```ts
-declare module "react-router-dom" {
-  import * as React from 'react';
-  // ...
-  type NavigateProps<T> = {
-    to: string | number,
-    replace?: boolean,
-    state?: T
-  }
-  //...
-  export class Navigate<T = any> extends React.Component<NavigateProps<T>>{}
-  // ...
-```
-
-For more information on creating type definitions for class components, you can refer to this [post](https://templecoding.com/blog/2016/03/31/creating-typescript-typings-for-existing-react-components) for reference.
-
-# Troubleshooting Handbook: Images and other non-TS/TSX files
-
-Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
-
 <!--END-SECTION:types-->
 
 <!--START-SECTION:operators-->
-
 # Troubleshooting Handbook: Operators
 
 - `typeof` and `instanceof`: type query used for refinement
@@ -2048,7 +1861,6 @@ Conditional Types are a difficult topic to get around so here are some extra res
 <!--END-SECTION:operators-->
 
 <!--START-SECTION:utilities-->
-
 # Troubleshooting Handbook: Utilities
 
 these are all built in, [see source in es5.d.ts](https://github.com/microsoft/TypeScript/blob/2c458c0d1ccb96442bca9ce43aa987fb0becf8a9/src/lib/es5.d.ts#L1401-L1474):
@@ -2072,7 +1884,6 @@ This section needs writing, but you can probably find a good starting point with
 <!--END-SECTION:utilities-->
 
 <!--START-SECTION:ts-config-->
-
 # Troubleshooting Handbook: tsconfig.json
 
 You can find [all the Compiler options in the TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html). [The new TS docs also has per-flag annotations of what each does](https://www.typescriptlang.org/v2/en/tsconfig#allowSyntheticDefaultImports). This is the setup I roll with for APPS (not libraries - for libraries you may wish to see the settings we use in `tsdx`):
@@ -2122,7 +1933,6 @@ Compilation speed grows linearly with size of codebase. For large projects, you 
 <!--END-SECTION:ts-config-->
 
 <!--START-SECTION:official-typings-bugs-->
-
 # Troubleshooting Handbook: Bugs in official typings
 
 If you run into bugs with your library's official typings, you can copy them locally and tell TypeScript to use your local version using the "paths" field. In your `tsconfig.json`:
@@ -2189,7 +1999,6 @@ You can see examples of these included in the built in type declarations in the 
 <!--END-SECTION:official-typings-bugs-->
 
 <!--START-SECTION:non-ts-files-->
-
 # Troubleshooting Handbook: Images and other non-TS/TSX files
 
 Use [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html):
@@ -2210,7 +2019,6 @@ Related issue: https://github.com/Microsoft/TypeScript-React-Starter/issues/12 a
 <!--END-SECTION:non-ts-files-->
 
 <!--START-SECTION:resources-->
-
 # Recommended React + TypeScript codebases to learn from
 
 - https://github.com/jaredpalmer/formik
@@ -2240,7 +2048,6 @@ React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescri
 <!--END-SECTION:resources-->
 
 <!--START-SECTION:editor-integration-->
-
 # Editor Tooling and Integration
 
 - VSCode
@@ -2257,7 +2064,6 @@ React Native Boilerplates: _contributed by [@spoeck](https://github.com/typescri
 <!--END-SECTION:editor-integration-->
 
 <!--START-SECTION:linting-->
-
 # Linting
 
 > ⚠️Note that [TSLint is now in maintenance and you should try to use ESLint instead](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). If you are interested in TSLint tips, please check this PR from [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). The rest of this section just focuses on ESLint. [You can convert TSlint to ESlint with this tool](https://github.com/typescript-eslint/tslint-to-eslint-config).
@@ -2364,15 +2170,14 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 <!--END-SECTION:linting-->
 
 <!--START-SECTION:other-resources-->
-
 # Other React + TypeScript resources
 
 - me! <https://twitter.com/swyx>
+- https://www.freecodecamp.org/news/how-to-build-a-todo-app-with-react-typescript-nodejs-and-mongodb/
 - <https://github.com/piotrwitek/react-redux-typescript-guide> - **HIGHLY HIGHLY RECOMMENDED**, i wrote this repo before knowing about this one, this has a lot of stuff I don't cover, including **REDUX** and **JEST**.
 - [Ultimate React Component Patterns with TypeScript 2.8](https://levelup.gitconnected.com/ultimate-react-component-patterns-with-typescript-2-8-82990c516935)
 - [Basarat's TypeScript gitbook has a React section](https://basarat.gitbook.io/typescript/tsx/react) with an [Egghead.io course](https://egghead.io/courses/use-typescript-to-develop-react-applications) as well.
 - [Palmer Group's TypeScript + React Guidelines](https://github.com/palmerhq/typescript) as well as Jared's other work like [disco.chat](https://github.com/jaredpalmer/disco.chat)
-- [Stefan Baumgartner's TypeScript + React Guide](https://fettblog.eu/typescript-react), which serves as a side-by-side guide to the official docs with extra articles on styling, custom hooks and patterns
 - [Sindre Sorhus' TypeScript Style Guide](https://github.com/sindresorhus/typescript-definition-style-guide)
 - [TypeScript React Starter Template by Microsoft](https://github.com/Microsoft/TypeScript-React-Starter) A starter template for TypeScript and React with a detailed README describing how to use the two together. Note: this doesnt seem to be frequently updated anymore.
 - [Brian Holt's Intermediate React course on Frontend Masters (paid)](https://frontendmasters.com/courses/intermediate-react/converting-the-app-to-typescript/) - Converting App To TypeScript Section
@@ -2385,15 +2190,14 @@ If you're looking for information on Prettier, check out the [Prettier](https://
 <!--END-SECTION:other-resources-->
 
 <!--START-SECTION:talks-->
-
 # Recommended React + TypeScript talks
 
 - [Ultimate React Component Patterns with TypeScript](https://www.youtube.com/watch?v=_PBQ3if6Fmg), by Martin Hochel, GeeCon Prague 2018
 - Please help contribute this new section!
+
 <!--END-SECTION:talks-->
 
 <!--START-SECTION:learn-ts-->
-
 # Time to Really Learn TypeScript
 
 Believe it or not, we have only barely introduced TypeScript here in this cheatsheet. There is a whole world of generic type logic that you will eventually get into, however it becomes far less dealing with React than just getting good at TypeScript so it is out of scope here. But at least you can get productive in React now :)
@@ -2410,10 +2214,10 @@ It is worth mentioning some resources to help you get started:
 <!--END-SECTION:learn-ts-->
 
 <!--START-SECTION:examples-->
-
 # Example App
 
 - [Create React App TypeScript Todo Example 2020](https://github.com/laststance/create-react-app-typescript-todo-example-2020)
+- [Ben Awad's 14 hour Fullstack React/GraphQL/TypeScript Tutorial](https://www.youtube.com/watch?v=I6ypD7qv3Z8)
 
 <!--END-SECTION:examples-->
 
